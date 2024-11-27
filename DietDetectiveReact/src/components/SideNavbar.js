@@ -38,7 +38,11 @@ export default function SideNavbar() {
                 </Flex>
                 <hr style={lineStyle}/>
                 <ListItem marginBottom="20px">
-                    <NavLink to="/">
+                    <NavLink to="/"
+                             style={({ isActive }) => ({
+                                 color: isActive ? "#3182ce" : "white", // Highlight active link
+                                 fontWeight: isActive ? "bold" : "normal"
+                             })}>
                         <Flex align="center">
                             <Box sx={iconBox}>
                                 <FaHome size={20}/>
@@ -50,7 +54,11 @@ export default function SideNavbar() {
                 {auth.isInterviewCompleted && auth.isAuthenticated ? (
                     <>
                         <ListItem marginBottom="20px">
-                            <NavLink to="/monitor">
+                            <NavLink to="/monitor"
+                                     style={({ isActive }) => ({
+                                         color: isActive ? "#3182ce" : "white", // Highlight active link
+                                         fontWeight: isActive ? "bold" : "normal"
+                                     })}>
                                 <Flex align="center">
                                     <Box sx={iconBox}>
                                         <GiHeartBeats size={20}/>
@@ -60,7 +68,11 @@ export default function SideNavbar() {
                             </NavLink>
                         </ListItem>
                         <ListItem marginBottom="20px">
-                            <NavLink to="/water">
+                            <NavLink to="/water"
+                                     style={({ isActive }) => ({
+                                         color: isActive ? "#3182ce" : "white", // Highlight active link
+                                         fontWeight: isActive ? "bold" : "normal"
+                                     })}>
                                 <Flex align="center">
                                     <Box sx={iconBox}>
                                         <IoWater size={20}/>
@@ -70,7 +82,11 @@ export default function SideNavbar() {
                             </NavLink>
                         </ListItem>
                         <ListItem marginBottom="20px">
-                            <NavLink to="/meal">
+                            <NavLink to="/meal"
+                                     style={({ isActive }) => ({
+                                         color: isActive ? "#3182ce" : "white", // Highlight active link
+                                         fontWeight: isActive ? "bold" : "normal"
+                                     })}>
                                 <Flex align="center">
                                     <Box sx={iconBox}>
                                         <GiHotMeal size={20}/>
@@ -80,7 +96,11 @@ export default function SideNavbar() {
                             </NavLink>
                         </ListItem>
                         <ListItem marginBottom="20px">
-                            <NavLink to="/recipes">
+                            <NavLink to="/recipes"
+                                     style={({ isActive }) => ({
+                                         color: isActive ? "#3182ce" : "white", // Highlight active link
+                                         fontWeight: isActive ? "bold" : "normal"
+                                     })}>
                                 <Flex align="center">
                                     <Box sx={iconBox}>
                                         <FaUtensils size={20}/>
@@ -90,7 +110,11 @@ export default function SideNavbar() {
                             </NavLink>
                         </ListItem>
                         <ListItem marginBottom="20px">
-                            <NavLink to="/chat">
+                            <NavLink to="/chat"
+                                     style={({ isActive }) => ({
+                                         color: isActive ? "#3182ce" : "white", // Highlight active link
+                                         fontWeight: isActive ? "bold" : "normal"
+                                     })}>
                                 <Flex align="center">
                                     <Box sx={iconBox}>
                                         <FaMessage size={20}/>
@@ -100,7 +124,11 @@ export default function SideNavbar() {
                             </NavLink>
                         </ListItem>
                         <ListItem marginBottom="20px">
-                            <NavLink to="/account">
+                            <NavLink to="/account"
+                                     style={({ isActive }) => ({
+                                         color: isActive ? "#3182ce" : "white", // Highlight active link
+                                         fontWeight: isActive ? "bold" : "normal"
+                                     })}>
                                 <Flex align="center">
                                     <Box sx={iconBox}>
                                         <FaUser size={20}/>
@@ -114,8 +142,11 @@ export default function SideNavbar() {
                 ) : (
                     <>
                         <ListItem marginBottom="20px">
-                            <NavLink to="/login">
-
+                            <NavLink to="/login"
+                                     style={({ isActive }) => ({
+                                         color: isActive ? "#3182ce" : "white", // Highlight active link
+                                         fontWeight: isActive ? "bold" : "normal"
+                                     })}>
                                 <Flex align="center">
                                     <Box sx={iconBox}>
                                         <FaSignInAlt size={20}/>
@@ -125,8 +156,11 @@ export default function SideNavbar() {
                             </NavLink>
                         </ListItem>
                         <ListItem marginBottom="20px">
-                            <NavLink to="/register">
-
+                            <NavLink to="/register"
+                                     style={({ isActive }) => ({
+                                         color: isActive ? "#3182ce" : "white", // Highlight active link
+                                         fontWeight: isActive ? "bold" : "normal"
+                                     })}>
                                 <Flex align="center">
                                     <Box sx={iconBox}>
                                         <FaUserPlus size={20}/>
