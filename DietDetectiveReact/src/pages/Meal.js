@@ -14,7 +14,16 @@ import {
   Th,
   Td,
   Button,
-  IconButton, useBreakpointValue, Radio, RadioGroup,
+  IconButton,
+  useBreakpointValue,
+  Radio,
+  RadioGroup,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalCloseButton,
+  ModalBody,
 } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import {
@@ -54,6 +63,10 @@ export default function Monitor() {
   const [isHighProteinSelected, setIsHighProteinSelected] = useState(false);
   const toast = useToast();
   const [isFilterActive, setIsFilterActive] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedMealId, setSelectedMealId] = useState(0);
+
+
 
   const categoryOptions = {
     ingredients: 'Składniki',
@@ -107,6 +120,7 @@ export default function Monitor() {
         });
   }, []);
   const setNewEaten = async (mealID) => {
+    setIsModalOpen(false)
     let weight = mealWeights[mealID] || 100;
     const mealToAdd = meals.find(meal => meal.id === mealID);
 
@@ -398,23 +412,15 @@ export default function Monitor() {
                                 Dodaj spożyty posiłek
                               </Button>
                           ) : (
-                              <Flex>
-                                <Input
-                                    type="number"
-                                    mr = {2}
-                                    placeholder="Wpisz wagę w gramach"
-                                    _placeholder={{  color: 'rgba(255, 255, 255, 0.800)' }}
-                                    value={mealWeights[meal.id] || ''}
-                                    onChange={(e) => handleWeightChange(meal.id, e.target.value)}
-                                />
-                                <IconButton
-                                    justifyContent={"center"}
+                              <Flex justifyContent="center" alignItems="center">
+                                <Button
                                     aria-label="Details"
-                                    icon={<FaPlus />}
                                     colorScheme="green"
-                                    onClick={() => setNewEaten(meal.id)}
-                                    isDisabled={!mealWeights[meal.id]}
-                                />
+                                    onClick={() => {
+                                      setIsModalOpen(true);
+                                      setSelectedMealId(meal.id);
+                                    }}
+                                >Dodaj</Button>
                               </Flex>
                           )}
                         </Td>
@@ -499,6 +505,33 @@ export default function Monitor() {
             </Box>
           </SimpleGrid>
         </Container>
+
+        <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+          <ModalOverlay/>
+          <ModalContent>
+            <ModalHeader>Podaj wagę zjedzonego produktu</ModalHeader>
+            <ModalCloseButton/>
+            <ModalBody>
+              <Flex direction="column" alignItems="stretch" gap={4}>
+                <Input
+                    type="number"
+                    mr = {2}
+                    placeholder="Wpisz wagę w gramach"
+                    value={mealWeights[selectedMealId] || ''}
+                    onChange={(e) => handleWeightChange(selectedMealId, e.target.value)}
+                />
+                <Button
+                    justifyContent={"center"}
+                    aria-label="Details"
+                    colorScheme="green"
+                    onClick={() => setNewEaten(selectedMealId)}
+                    isDisabled={!mealWeights[selectedMealId]}
+                >Dodaj posiłek</Button>
+              </Flex>
+            </ModalBody>
+            <br></br>
+          </ModalContent>
+        </Modal>
       </div>
   );
 }

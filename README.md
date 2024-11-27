@@ -62,7 +62,7 @@ Rozpowszechniane na podstawie Licencji MIT. Zobacz [MIT LICENSE](https://github.
 #### © 2023 DietDetective | Powered by Full-Stack Developer Sebastian Bednarski
 
 ## Do naprawy
-- [ ] „poprawienie” dodawania wagi posiłków,
+- [x] „poprawienie” dodawania wagi posiłków,
 - [ ] wydzielenie listy dodanych posiłków (tym samym usuwania) w inne miejsce,
 - [ ] możliwość edycji wagi już dodanych posiłków,
 - [ ] możliwość dodawania posiłków do ulubionych / zakładka z ostatnio dodawanymi,
