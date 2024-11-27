@@ -1,10 +1,10 @@
 import React, {useContext} from 'react';
 import {NavLink} from 'react-router-dom';
 import {GiHeartBeats, GiHotMeal} from 'react-icons/gi';
-import { FaSignInAlt, FaUser, FaUserPlus, FaUtensils, FaHome} from 'react-icons/fa';
+import {FaSignInAlt, FaUser, FaUserPlus, FaUtensils, FaHome} from 'react-icons/fa';
 import {Box, Flex, Heading, Image, List, ListItem} from '@chakra-ui/react';
 import AuthContext from "../context/AuthProvider";
-import {  FaMessage} from "react-icons/fa6";
+import {FaMessage} from "react-icons/fa6";
 import {IoWater} from "react-icons/io5";
 
 
@@ -114,29 +114,32 @@ export default function SideNavbar() {
                 ) : (
                     <>
                         <ListItem marginBottom="20px">
-                            <Flex align="center">
-                                <Box sx={iconBox}>
-                                    <FaSignInAlt size={20}/>
-                                </Box>
-                                <NavLink to="/login">
+                            <NavLink to="/login">
+
+                                <Flex align="center">
+                                    <Box sx={iconBox}>
+                                        <FaSignInAlt size={20}/>
+                                    </Box>
                                     Logowanie
-                                </NavLink>
-                            </Flex>
+                                </Flex>
+                            </NavLink>
                         </ListItem>
                         <ListItem marginBottom="20px">
-                            <Flex align="center">
-                                <Box sx={iconBox}>
-                                    <FaUserPlus size={20}/>
-                                </Box>
-                                <NavLink to="/register">
+                            <NavLink to="/register">
+
+                                <Flex align="center">
+                                    <Box sx={iconBox}>
+                                        <FaUserPlus size={20}/>
+                                    </Box>
                                     Rejestracja
-                                </NavLink>
-                            </Flex>
+                                </Flex>
+                            </NavLink>
+
                         </ListItem>
                     </>
                 )}
             </List>
-            </div>
-        );
+        </div>
+    );
 
-    }
+}

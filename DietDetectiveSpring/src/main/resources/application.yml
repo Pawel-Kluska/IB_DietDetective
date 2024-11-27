@@ -25,7 +25,7 @@ spring:
 app:
   security:
     jwt:
-      tokenSecret: ${JWT_SECRET_KEY}
+      tokenSecret: i2bKupblweWWLbjSU3Lpw2FQMBYCHtVJ8CsfiMk1tGpqf0rZeV4iGEUkxmxmPh5V
       tokenExpirationSeconds: 1209600 # 14 days
     cors:
       allowedOrigins: \*
