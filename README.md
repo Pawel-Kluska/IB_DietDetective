@@ -60,3 +60,23 @@ Rozpowszechniane na podstawie Licencji MIT. Zobacz [MIT LICENSE](https://github.
 - Link do repozytorium kodu projektu: https://github.com/sebo21cc21/IB_DietDetective
 - Adres e-mail: 261662@student.pwr.edu.pl
 #### © 2023 DietDetective | Powered by Full-Stack Developer Sebastian Bednarski
+
+## Do naprawy
+- [ ] „poprawienie” dodawania wagi posiłków,
+- [ ] wydzielenie listy dodanych posiłków (tym samym usuwania) w inne miejsce,
+- [ ] możliwość edycji wagi już dodanych posiłków,
+- [ ] możliwość dodawania posiłków do ulubionych / zakładka z ostatnio dodawanymi,
+- [ ] przeprojektowanie strony głównej, alternatywnie usunięcie jej,
+- [ ] przeniesienie zmiany docelowej wagi z profilu do monitorowania,
+- [ ] usunięcie „Witaj Szymon” lub chociaż zmiana w interaktywny przycisk, by przenosiło do profilu,
+- [x] usunięcie z zakładki „Monitorowanie”  okienka z „Miło Cię znów widzieć!”,
+- [ ] poprawka przycisków przy listach, by przycisk „Następna” i numer strony się nie przesuwały po przejściu na 2 stronę.
+- [ ] dodanie komunikatu o braku wyników wyszukiwania,
+- [ ] dodanie alfabetycznego sortowania,
+- [ ] oznaczenie wymaganych pól przy rejestracji i wymagań, które hasło musi spełnić,
+- [ ] zmiana wyboru daty i formatu w wywiadzie środowiskowym na polski,
+- [x] nałożenie przycisku na ikony logowania i rejestracji,
+- [ ] możliwość dodania posiłku z poziomu przepisu,
+- [ ] zmiana wykresu nawodnienia na słupkowy,
+- [ ] zmiana komunikatu przy dodawaniu/usuwaniu nawodnienia z informacji o zmianie od wejścia do zakładki na informację o łącznym, aktualnym stanie,
+- [ ] podświetlenie (zaznaczenie) zakładki, w której się obecnie znajduje. 
