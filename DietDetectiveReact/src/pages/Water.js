@@ -23,7 +23,7 @@ import {CiCoffeeCup} from "react-icons/ci";
 import { SlCup } from "react-icons/sl";
 import { BsCupStraw } from "react-icons/bs";
 import {getWater, handleWater} from "../util/APIUtils";
-import {format, subDays, isAfter, addDays, startOfWeek, isSameDay} from 'date-fns';
+import {format, subDays, isAfter, addDays, startOfWeek, isSameDay, isToday} from 'date-fns';
 import { useToast } from '@chakra-ui/react';
 
 import {
@@ -69,6 +69,8 @@ export default function Water() {
     getWater()
         .then(response => {
           setWaterData(response.data);
+          const volume = response.data.find(d => isToday(new Date(d.date))).volume
+          setWaterVolume(volume)
         })
         .catch(error => {
           console.error('Błąd podczas pobierania danych użytkownika', error);
@@ -154,8 +156,8 @@ export default function Water() {
 
   const showNotification = (volume, newWater) => {
     toast({
-      title: volume >= 0 ? 'Dodano' : 'Usunięto',
-      description: `${Math.abs(volume)} ml, aktualna zmiana nawodnienia: ${newWater} ml`,
+      title: (volume >= 0 ? 'Dodano' : 'Usunięto') + ` ${Math.abs(volume)} ml`,
+      description: `Aktualny poziom nawodnienia: ${newWater} ml`,
       status: volume >= 0 ? 'success' : 'error',
       duration: 5000,
       isClosable: true,

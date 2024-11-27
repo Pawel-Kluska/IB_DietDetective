@@ -78,5 +78,5 @@ Rozpowszechniane na podstawie Licencji MIT. Zobacz [MIT LICENSE](https://github.
 - [x] nałożenie przycisku na ikony logowania i rejestracji,
 - [ ] możliwość dodania posiłku z poziomu przepisu,
 - [ ] zmiana wykresu nawodnienia na słupkowy,
-- [ ] zmiana komunikatu przy dodawaniu/usuwaniu nawodnienia z informacji o zmianie od wejścia do zakładki na informację o łącznym, aktualnym stanie,
+- [x] zmiana komunikatu przy dodawaniu/usuwaniu nawodnienia z informacji o zmianie od wejścia do zakładki na informację o łącznym, aktualnym stanie,
 - [x] podświetlenie (zaznaczenie) zakładki, w której się obecnie znajduje. 
