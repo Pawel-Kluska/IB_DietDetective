@@ -54,6 +54,22 @@ export function handleDeleteEatenMeal(mealId) {
     };
     return axios.delete(`${API_BASE_URL}/eaten-meals/${mealId}`, config);
 }
+
+export function handleEditEatenMeal(requestBody) {
+    const token = localStorage.getItem(ACCESS_TOKEN);
+
+    if (!token) {
+        return Promise.reject("No access token set.");
+    }
+
+    const config = {
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
+        },
+    };
+    return axios.put(`${API_BASE_URL}/eaten-meals`, requestBody, config);
+}
 export function handleSetWeight(requestBody) {
     const token = localStorage.getItem(ACCESS_TOKEN);
 

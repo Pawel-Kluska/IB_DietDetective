@@ -63,8 +63,8 @@ Rozpowszechniane na podstawie Licencji MIT. Zobacz [MIT LICENSE](https://github.
 
 ## Do naprawy
 - [x] „poprawienie” dodawania wagi posiłków,
-- [ ] wydzielenie listy dodanych posiłków (tym samym usuwania) w inne miejsce,
-- [ ] możliwość edycji wagi już dodanych posiłków,
+- [x] wydzielenie listy dodanych posiłków (tym samym usuwania) w inne miejsce,
+- [x] możliwość edycji wagi już dodanych posiłków,
 - [ ] możliwość dodawania posiłków do ulubionych / zakładka z ostatnio dodawanymi,
 - [ ] przeprojektowanie strony głównej, alternatywnie usunięcie jej,
 - [x] przeniesienie zmiany docelowej wagi z profilu do monitorowania,

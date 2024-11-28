@@ -27,6 +27,15 @@ public class EatenMealController {
         }
     }
 
+    @PutMapping
+    public ResponseEntity<EatenMeal> editEatenMeal(@RequestBody EatenMealRequest eatenMealRequest, @AuthenticationPrincipal UserDetails userDetails) {
+        try {
+            return ResponseEntity.ok(eatenMealsService.editEatenMeal(eatenMealRequest, userDetails.getUsername()));
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
     @GetMapping("/today")
     public ResponseEntity<List<EatenMeal>> getEatenMealsForToday(@AuthenticationPrincipal UserDetails userDetails) {
         return ResponseEntity.ok(eatenMealsService.getEatenMealsWithoutDateForToday(userDetails.getUsername()));

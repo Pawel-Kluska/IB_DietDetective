@@ -49,6 +49,22 @@ public class EatenMealsService {
         return eatenMealRepository.save(eatenMeal);
     }
 
+    public EatenMeal editEatenMeal(EatenMealRequest eatenMealRequest, String email) {
+        User userByEmail = userRepository.findByEmail(email).orElseThrow(EntityNotFoundException::new);
+        Meal mealById = mealService.getMealById(eatenMealRequest.getMealId());
+
+        Optional<EatenMeal> dbEatenMeal = eatenMealRepository
+                .findByMealIdAndUserIdAndDate(
+                        mealById.getId(),
+                        userByEmail.getId(),
+                        new Date(System.currentTimeMillis()));
+        if (dbEatenMeal.isPresent()) {
+            EatenMeal eatenMeal = dbEatenMeal.get();
+            eatenMeal.setEatenWeight(eatenMealRequest.getEatenWeight());
+            return eatenMealRepository.save(eatenMeal);
+        } else throw new EntityNotFoundException();
+    }
+
     public List<EatenMeal> getEatenMealsForToday(String email) {
         return eatenMealRepository.findAllByUserEmailAndDate(email, new Date(System.currentTimeMillis()));
     }
