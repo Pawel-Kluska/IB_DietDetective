@@ -6,15 +6,26 @@ import {
     CircularProgress,
     CircularProgressLabel,
     Flex,
-    Button, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, Input, ModalFooter, IconButton
+    Button,
+    Modal,
+    ModalOverlay,
+    ModalContent,
+    ModalHeader,
+    ModalCloseButton,
+    ModalBody,
+    Input,
+    ModalFooter,
+    IconButton,
+    Spacer, useToast
 } from '@chakra-ui/react'
 import {AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer} from 'recharts';
 import React, {useEffect, useState} from 'react'
-import {getCurrentUser, getUserSummary, getUserWeight} from "../util/APIUtils";
+import {getCurrentUser, getUserSummary, getUserWeight, handleGoal, handleSetTargetWeight} from "../util/APIUtils";
 import {useNavigate} from "react-router-dom";
 import {ACCESS_TOKEN, API_BASE_URL} from "../constans";
 import axios from "axios";
 import {FaInfoCircle} from "react-icons/fa";
+import {determineGoal} from "./Account";
 
 export function calculatePercentWeight(weight, estimatedWeight) {
     let percentWeight = 100 - (weight / estimatedWeight) * 100;
@@ -104,7 +115,11 @@ export default function Monitor() {
     const [isWeightModalOpen, setIsWeightModalOpen] = useState(false);
     const [isBMIModalOpen, setIsBMIModalOpen] = useState(false);
     const [isBMRModalOpen, setIsBMRModalOpen] = useState(false);
-    const [newWeight, setNewWeight] = useState('');
+    const [newWeight, setNewWeight] = useState(0);
+    const [isMealModalOpen, setIsMealModalOpen] = useState(false);
+    const [newTargetWeight, setNewTargetWeight] = useState(0);
+    const toast = useToast();
+
     useEffect(() => {
         if (summary && summary.todayWeight === 0) {
             setIsWeightModalOpen(true);
@@ -141,18 +156,59 @@ export default function Monitor() {
         getUserSummary()
             .then(response => {
                 setSummary(response.data);
+                setNewTargetWeight(response.data.targetWeight)
+                setNewWeight(response.data.todayWeight)
             })
             .catch(error => {
                 console.error('Błąd podczas pobierania danych użytkownika', error);
             });
     };
+
+    const handleModal = async () => {
+        console.log(summary.todayWeight)
+        console.log(summary.targetWeight)
+
+        if (newTargetWeight && newTargetWeight !== 0)
+            await handleTargetWeightChange()
+        if (newWeight && newTargetWeight !== 0)
+            await handleWeightChange()
+    }
+
+    const handleTargetWeightChange = async () => {
+        let requestBody = {
+            targetWeight: newTargetWeight
+        };
+        try {
+            await handleSetTargetWeight(requestBody);
+            setUser(prevUser => ({ ...prevUser, targetWeight: newTargetWeight }));
+            await handleGoal({goal: determineGoal(newWeight, newTargetWeight)});
+            setIsMealModalOpen(false);
+            toast({
+                title: 'Pomyślnie zmieniono wagę docelową',
+                status: 'success',
+                duration: 5000,
+                isClosable: true,
+                position: "top"
+            });
+        } catch (error) {
+            console.error('Nie udało się zaktualizować wagi docelowej', error);
+        }
+    };
     const handleWeightChange = async () => {
+        setIsMealModalOpen(false);
         let weightRequest = {
             weight: newWeight
         };
 
         try {
             await handleSetWeight(weightRequest);
+            toast({
+                title: 'Pomyślnie zmieniono wagę',
+                status: 'success',
+                duration: 5000,
+                isClosable: true,
+                position: "top"
+            });
             setNewWeight('');
             setIsWeightModalOpen(false);
             await fetchData();
@@ -240,22 +296,47 @@ export default function Monitor() {
     const redNumber = {
         color: "red"
     }
+
+    const isSaveDisabled = () => {
+        if (newWeight && newWeight === summary.todayWeight) {
+            console.log(false)
+            return true
+        }
+
+        if (newTargetWeight && newTargetWeight === summary.todayWeight) {
+            console.log(false)
+            return true
+        }
+        console.log(true)
+
+        return false
+    }
+
     return (
         <div className="App">
             <Container as="section" maxWidth={"3x1"} py="10px" ml={{base: '5', md: '0'}}>
                 <SimpleGrid spacing={10} minChildWidth="250px">
                     <Box sx={SecondBox} bgGradient="linear(to-r, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.6))">
-                        <Flex justifyContent={"flex-start"}>
+                        <Flex justifyContent="flex-start" alignItems="center">
                             <Text fontSize="xl" fontWeight="bold">Miernik osiągnięć</Text>
                             <IconButton
                                 ml={4}
                                 aria-label="Show BMI Info"
-                                icon={<FaInfoCircle/>}
+                                icon={<FaInfoCircle />}
                                 onClick={openBMIModal}
                                 size="sm"
                                 colorScheme="blue"
                             />
+                            <Spacer />
+                            <Button
+                                size="sm"
+                                colorScheme="teal"
+                                onClick={() => setIsMealModalOpen(true)}
+                            >
+                                Edytuj
+                            </Button>
                         </Flex>
+
                         <Flex justifyContent={"flex-start"}>
                             <div>
                                 <Text><span style={{
@@ -431,6 +512,37 @@ export default function Monitor() {
                         </Text>
                     </ModalBody>
                     <br></br>
+                </ModalContent>
+            </Modal>
+
+            <Modal isOpen={isMealModalOpen} onClose={() => setIsMealModalOpen(false)} isCentered>
+                <ModalOverlay />
+                <ModalContent mx="auto" my="auto" style={{ transform: 'translate(-50%, -50%)' }}>
+                    <ModalHeader>Zmień swoją wagę</ModalHeader>
+                    <ModalCloseButton />
+                    <ModalBody>
+                        <Text>Waga aktualna (kg)</Text>
+                        <Input
+                            placeholder="Wprowadź nową wagę w kg"
+                            value={newWeight}
+                            type={"number"}
+                            onChange={(e) => setNewWeight(e.target.value)}
+                        />
+                        <Text mt={3}>Waga docelowa(kg)</Text>
+                        <Input
+                            placeholder="Wprowadź nową wagę docelową w kg"
+                            type={"number"}
+                            value={newTargetWeight}
+                            onChange={(e) => setNewTargetWeight(e.target.value)}
+                        />
+                    </ModalBody>
+
+                    <ModalFooter>
+                        <Button colorScheme="blue" mr={3} onClick={handleModal} isDisabled={isSaveDisabled()} >
+                            Zapisz
+                        </Button>
+                        <Button variant="ghost" onClick={() => setIsMealModalOpen(false)}>Anuluj</Button>
+                    </ModalFooter>
                 </ModalContent>
             </Modal>
         </div>
