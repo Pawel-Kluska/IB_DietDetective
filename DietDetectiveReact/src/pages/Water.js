@@ -349,17 +349,18 @@ export default function Water() {
         <SimpleGrid spacing={10} minChildWidth="250px">
           <Box sx={PlotBox}>
             <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={chartData} >
+              <BarChart data={chartData}>
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="name" />
                 <YAxis />
 
                 <Legend />
                 <ReferenceLine y={2000} label="2000 ml" stroke="red" strokeDasharray="3 3" />
-                <Bar dataKey="nawodnienie" shape={<TriangleBar />} fill="#8884d8" />
+                <Bar dataKey="nawodnienie" fill="#8884d8" />
               </BarChart>
             </ResponsiveContainer>
-        </Box>
+          </Box>
+
           <Box sx={CalendarBox}>
             <Text fontSize ={{ base: 'md', md: 'xl' }} fontWeight="bold" mb={4}>
               Dni odpowiedniego nawodnienia w tygodniu

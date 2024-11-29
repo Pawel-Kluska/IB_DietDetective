@@ -77,6 +77,6 @@ Rozpowszechniane na podstawie Licencji MIT. Zobacz [MIT LICENSE](https://github.
 - [ ] zmiana wyboru daty i formatu w wywiadzie środowiskowym na polski,
 - [x] nałożenie przycisku na ikony logowania i rejestracji,
 - [x] możliwość dodania posiłku z poziomu przepisu,
-- [ ] zmiana wykresu nawodnienia na słupkowy,
+- [x] zmiana wykresu nawodnienia na słupkowy,
 - [x] zmiana komunikatu przy dodawaniu/usuwaniu nawodnienia z informacji o zmianie od wejścia do zakładki na informację o łącznym, aktualnym stanie,
 - [x] podświetlenie (zaznaczenie) zakładki, w której się obecnie znajduje. 
