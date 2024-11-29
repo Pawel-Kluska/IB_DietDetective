@@ -76,7 +76,7 @@ Rozpowszechniane na podstawie Licencji MIT. Zobacz [MIT LICENSE](https://github.
 - [ ] oznaczenie wymaganych pól przy rejestracji i wymagań, które hasło musi spełnić,
 - [ ] zmiana wyboru daty i formatu w wywiadzie środowiskowym na polski,
 - [x] nałożenie przycisku na ikony logowania i rejestracji,
-- [ ] możliwość dodania posiłku z poziomu przepisu,
+- [x] możliwość dodania posiłku z poziomu przepisu,
 - [ ] zmiana wykresu nawodnienia na słupkowy,
 - [x] zmiana komunikatu przy dodawaniu/usuwaniu nawodnienia z informacji o zmianie od wejścia do zakładki na informację o łącznym, aktualnym stanie,
 - [x] podświetlenie (zaznaczenie) zakładki, w której się obecnie znajduje. 

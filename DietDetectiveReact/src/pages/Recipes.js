@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import {Box, Container, SimpleGrid, Text, Heading, IconButton, Flex, Button} from '@chakra-ui/react';
+import {Box, Container, SimpleGrid, Text, Heading, IconButton, Flex, Button, useToast} from '@chakra-ui/react';
 import {
 
   FaInfoCircle,
   FaArrowRight,
   FaArrowLeft,
 } from 'react-icons/fa';
-import {getMeal, getMeals} from '../util/APIUtils';
+import {getMeal, getMeals, handleEaten} from '../util/APIUtils';
 import {useNavigate} from "react-router-dom";
 
 export default function Recipes() {
   const [meals, setMeals] = useState([]);
   const [meal, setMeal] = useState([]);
   const [id] = useState(16);
+  const toast = useToast();
+
   const FirstBox = {
     bgGradient: "linear(to-r, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.6))",
     width: "350px",
@@ -60,6 +62,22 @@ export default function Recipes() {
         });
   };
 
+  const setNewEaten = async (mealID, mealName) => {
+    const mealUnit = 100;
+    try {
+      await handleEaten({mealId: parseInt(mealID), eatenWeight: mealUnit});
+      toast({
+        title: `Pomyślnie dodano ${mealName}`,
+        status: 'success',
+        duration: 5000,
+        isClosable: true,
+        position: "top"
+      });
+    } catch (error) {
+      console.error('Error adding eaten meal', error);
+    }
+  };
+
   useEffect(() => {
     fetchMeals();
     fetchMeal();
@@ -69,71 +87,81 @@ export default function Recipes() {
       <div className="App">
         <Heading color="white">Na co masz ochotę?</Heading>
         <Container maxWidth={'3x1'} py="10px" >
-          <SimpleGrid spacing={6} ml ={{ base: '0', md: '5' }} minChildWidth="300px">
-            {meals && meals.slice(startIndex, endIndex).map((meal, index) => (
-                <Box key={meal.id} sx={FirstBox}>
-                  <Flex
-                      direction="column"
-                      justifyContent="space-between"
-                      height="100%"
-                  >
-                    <Flex justifyContent="center" height="50%">
-                      <img
-                          src={meal.image}
-                          alt={meal.name}
-                          style={{
-                            maxWidth: '100%',
-                            maxHeight: '100%',
-                            borderRadius: '50%'
-                          }}
-                      />
-                    </Flex>
-                    <Flex direction="column" alignItems="center">
-                      <Text fontSize="lg" fontWeight="bold" >
-                        {meal.name}
-                      </Text>
-                      <Text mb={3}>{meal.calories} kcal / 100g</Text>
-                      <Button
-                          leftIcon={<FaInfoCircle />}
-                          onClick={() => handleDetailsClick(meal.id)}
-                          size="sm"
-                          colorScheme="blue"
-                          width="100%"
-                      >
-                        Przygotowanie
-                      </Button>
-                    </Flex>
-                  </Flex>
-                </Box>
-            ))}
+          <SimpleGrid spacing={6} ml={{ base: '0', md: '5' }} minChildWidth="300px">
+            {meals &&
+                meals.slice(startIndex, endIndex).map((meal, index) => (
+                    <Box key={meal.id} sx={FirstBox}>
+                      <Flex direction="column" justifyContent="space-between" height="100%">
+                        <Flex justifyContent="center" height="40%">
+                          <img
+                              src={meal.image}
+                              alt={meal.name}
+                              style={{
+                                maxWidth: '100%',
+                                maxHeight: '100%',
+                                borderRadius: '50%',
+                              }}
+                          />
+                        </Flex>
+                        <Flex direction="column" alignItems="center">
+                          <Text fontSize="lg" fontWeight="bold">
+                            {meal.name}
+                          </Text>
+                          <Text mb={3}>{meal.calories} kcal / 100g</Text>
+                        </Flex>
+                        <Flex direction="column" mt="auto">
+                          <Button
+                              leftIcon={<FaInfoCircle />}
+                              onClick={() => handleDetailsClick(meal.id)}
+                              size="sm"
+                              colorScheme="blue"
+                              width="90%" /* Adjusted to be narrower */
+                              mx="auto" /* Centers the button */
+                          >
+                            Przygotowanie
+                          </Button>
+                          <Button
+                              leftIcon={<FaInfoCircle />}
+                              onClick={() => setNewEaten(meal.id, meal.name)}
+                              size="sm"
+                              colorScheme="green"
+                              width="90%" /* Adjusted to be narrower */
+                              mx="auto" /* Centers the button */
+                              mt={3}
+                          >
+                            Dodaj do spożytych
+                          </Button>
+                        </Flex>
+
+                      </Flex>
+                    </Box>
+                ))}
           </SimpleGrid>
+
         </Container>
 
-        <Flex justifyContent="center" mt="2vh" mb="5vh" align="center" ml ={{ base: '16', md: '0' }}>
-          {currentPage > 1 && (
+        <Flex justifyContent="center" mt="2vh" mb="5vh" align="center" ml={{ base: '16', md: '0' }}>
           <IconButton
               aria-label="Previous Page"
               icon={<FaArrowLeft />}
               onClick={() => changePage(currentPage - 1)}
               size="sm"
               colorScheme="whiteAlpha"
-              disabled={currentPage === 1}
+              visibility={currentPage > 1 ? "visible" : "hidden"}
           />
-          )}
           <Text color="white" mx="20px">
             {currentPage}/{totalPages}
           </Text>
-          {currentPage < totalPages && (
           <IconButton
               aria-label="Next Page"
               icon={<FaArrowRight />}
               onClick={() => changePage(currentPage + 1)}
               size="sm"
               colorScheme="whiteAlpha"
-              disabled={currentPage === Math.ceil(meals.length / itemsPerPage)}
+              visibility={currentPage < totalPages ? "visible" : "hidden"}
           />
-          )}
         </Flex>
+
       </div>
   );
 }

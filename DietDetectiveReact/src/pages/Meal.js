@@ -589,12 +589,15 @@ export default function Monitor() {
                                                             <Td data-label="Węglowodany">{(eatenMeal.meal.carbohydrates).toFixed(1)} g</Td>
                                                             <Td data-label="Tłuszcze">{(eatenMeal.meal.fats).toFixed(1)} g</Td>
                                                             <Td className="add-to-eaten">
-                                                                <Button colorScheme="blue"
-                                                                        onClick={() => {
-                                                                            setIsEditModalOpen(true)
-                                                                            setEditWeightValue(eatenMeal.eatenWeight)
-                                                                            setEditWeightId(eatenMeal.meal.id)
-                                                                        }}>
+                                                                <Button
+                                                                    colorScheme="blue"
+                                                                    isDisabled={eatenMeal.meal.id >= 6605 && eatenMeal.meal.id <= 6640}
+                                                                    onClick={() => {
+                                                                        setIsEditModalOpen(true)
+                                                                        setEditWeightValue(eatenMeal.eatenWeight)
+                                                                        setEditWeightId(eatenMeal.meal.id)
+                                                                    }}
+                                                                >
                                                                     Edytuj
                                                                 </Button>
                                                             </Td>
