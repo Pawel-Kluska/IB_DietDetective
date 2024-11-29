@@ -447,7 +447,11 @@ export default function Monitor() {
                                     </Flex>
 
                                     <Text mt={5} fontSize="3xl" fontWeight="bold" color="white">{isFavourites ? "Ulubione posiłki" : "Wszystkie posiłki"}</Text>
-
+                                    {paginatedMeals.length === 0 ? (
+                                        <Text color="white" mt="4" textAlign="center">
+                                            Brak posiłków do wyświetlenia.
+                                        </Text>
+                                    ) : (
                                     <Table mt={3} className="responsive-table" variant="simple" color="white">
                                         <Thead>
                                             <Tr>
@@ -537,6 +541,7 @@ export default function Monitor() {
                                             ))}
                                         </Tbody>
                                     </Table>
+                                    )}
                                     <Flex justifyContent="center" mt="2" align="center">
                                         <Button
                                             onClick={() => setCurrentPage(currentPage - 1)}
