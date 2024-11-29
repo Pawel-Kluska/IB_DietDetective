@@ -538,14 +538,21 @@ export default function Monitor() {
                                         </Tbody>
                                     </Table>
                                     <Flex justifyContent="center" mt="2" align="center">
-                                        {currentPage > 1 && (
-                                            <Button onClick={() => setCurrentPage(currentPage - 1)}>Poprzednia</Button>
-                                        )}
+                                        <Button
+                                            onClick={() => setCurrentPage(currentPage - 1)}
+                                            visibility={currentPage > 1 ? "visible" : "hidden"}
+                                        >
+                                            Poprzednia
+                                        </Button>
                                         <Text fontSize="md" color="white" mx="4">{`${currentPage}/${totalPages}`}</Text>
-                                        {currentPage < totalPages && (
-                                            <Button onClick={() => setCurrentPage(currentPage + 1)}>Następna</Button>
-                                        )}
+                                        <Button
+                                            onClick={() => setCurrentPage(currentPage + 1)}
+                                            visibility={currentPage < totalPages ? "visible" : "hidden"}
+                                        >
+                                            Następna
+                                        </Button>
                                     </Flex>
+
                                 </TabPanel>
                                 <TabPanel>
 
