@@ -239,6 +239,36 @@ export function getMeals(id) {
     })
 }
 
+export function getFavouriteMeals() {
+    const token = localStorage.getItem(ACCESS_TOKEN);
+    return axios.get(`${API_BASE_URL}/users/favourite`, {
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+        },
+    })
+}
+
+export function addFavouriteMeal(requestBody) {
+    const token = localStorage.getItem(ACCESS_TOKEN);
+    return axios.post(`${API_BASE_URL}/users/favourite`, requestBody, {
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+        },
+    })
+}
+
+export function deleteFavouriteMeal(mealId) {
+    const token = localStorage.getItem(ACCESS_TOKEN);
+    return axios.delete(`${API_BASE_URL}/users/favourite/${mealId}`, {
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+        },
+    })
+}
+
 export function getMeal(id) {
     const token = localStorage.getItem(ACCESS_TOKEN);
     return axios.get(`${API_BASE_URL}/meals/${id}`, {

@@ -1,5 +1,7 @@
 package com.example.dietdetectivespring.meal;
 
+import com.example.dietdetectivespring.user.User;
+import com.example.dietdetectivespring.user.UserService;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

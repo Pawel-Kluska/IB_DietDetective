@@ -1,6 +1,9 @@
 package com.example.dietdetectivespring.user;
 
 import com.example.dietdetectivespring.eatenmeals.EatenMealsService;
+import com.example.dietdetectivespring.meal.FavouriteMealRequest;
+import com.example.dietdetectivespring.meal.Meal;
+import com.example.dietdetectivespring.meal.MealService;
 import com.example.dietdetectivespring.utils.BMRCalculator;
 import com.example.dietdetectivespring.waterintake.WaterIntakeService;
 import com.example.dietdetectivespring.weightrecords.WeightRecord;
@@ -19,6 +22,7 @@ public class UserService {
     private final WeightRecordService weightRecordService;
     private final WaterIntakeService waterIntakeService;
     private final EatenMealsService eatenMealsService;
+    private final MealService mealService;
 
     public User getUserByEmail(String email) {
         return userRepository.findByEmail(email).orElseThrow(EntityNotFoundException::new);
@@ -76,4 +80,22 @@ public class UserService {
                 .build();
     }
 
+    public UserFavouriteMeals getUserFavourites(String email) {
+        User userByEmail = getUserByEmail(email);
+        return new UserFavouriteMeals(userByEmail.getMeals());
+    }
+
+    public User saveFavourite(FavouriteMealRequest mealRequest, String email) {
+        User user = getUserByEmail(email);
+        Meal meal = mealService.getMealById(mealRequest.getMealId());
+        user.addFavouriteMeal(meal);
+        return userRepository.save(user);
+    }
+
+    public User deleteFavourite(int mealId, String email) {
+        User user = getUserByEmail(email);
+        Meal meal = mealService.getMealById(mealId);
+        user.deleteFavouriteMeal(meal);
+        return userRepository.save(user);
+    }
 }

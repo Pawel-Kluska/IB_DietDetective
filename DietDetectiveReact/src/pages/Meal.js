@@ -23,13 +23,14 @@ import {
     ModalContent,
     ModalHeader,
     ModalCloseButton,
-    ModalBody, ModalFooter, TabList, Tab, TabPanels, TabPanel, Tabs,
+    ModalBody, ModalFooter, TabList, Tab, TabPanels, TabPanel, Tabs, Icon,
 } from '@chakra-ui/react';
 import React, {useEffect, useState} from 'react';
 import {
+    addFavouriteMeal, deleteFavouriteMeal,
     getCategoryName,
     getEaten,
-    getEatenSummary,
+    getEatenSummary, getFavouriteMeals,
     getMeals,
     handleDeleteEatenMeal,
     handleEaten, handleEditEatenMeal,
@@ -39,6 +40,7 @@ import {useToast} from '@chakra-ui/react';
 import EatenMealsSummaryChart from "../components/EatenMealsSummaryChart";
 import EatenMealsLastWeekChart from "../components/EatenMealsLastWeekChart";
 import {LuListFilter} from "react-icons/lu";
+import {StarIcon} from "@chakra-ui/icons";
 
 export default function Monitor() {
     const [meals, setMeals] = useState([]);
@@ -68,6 +70,8 @@ export default function Monitor() {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const [editWeightValue, setEditWeightValue] = useState(0)
     const [editWeightId, setEditWeightId] = useState(0)
+    const [favourites, setFavourites] = useState([])
+    const [isFavourites, setIsFavourites] = useState(false)
 
 
     const categoryOptions = {
@@ -76,6 +80,42 @@ export default function Monitor() {
     };
 
 
+    const addFavourite = (mealId, mealName) => {
+        const requestBody = {
+            mealId: mealId
+        }
+        addFavouriteMeal(requestBody)
+            .then(response => {
+                toast({
+                    title: `Pomyślnie dodano ${mealName} do ulubionych`,
+                    status: 'success',
+                    duration: 5000,
+                    isClosable: true,
+                    position: "top"
+                });
+                fetchFavourites()
+            })
+            .catch(error => {
+                console.error('Error fetching favourites', error);
+            });
+    }
+
+    const deleteFavourite = (mealId, mealName) => {
+        deleteFavouriteMeal(mealId)
+            .then(response => {
+                toast({
+                    title: `Pomyślnie usunięto ${mealName} z ulubionych`,
+                    status: 'warning',
+                    duration: 5000,
+                    isClosable: true,
+                    position: "top"
+                });
+                fetchFavourites()
+            })
+            .catch(error => {
+                console.error('Error fetching favourites', error);
+            });
+    }
     const fetchCategoryMeals = async (categoryId) => {
         getMeals(categoryId)
             .then(response => {
@@ -85,6 +125,15 @@ export default function Monitor() {
                 console.error('Error fetching meals', error);
             });
     };
+
+    const fetchFavourites = async () => {
+        getFavouriteMeals()
+            .then(response => {
+                setFavourites(response.data.favouriteMeals);
+            }).catch(error => {
+            console.error('Error fetching meals', error);
+        });
+    }
     const fetchEatenMeals = async () => {
         getEaten()
             .then(response => {
@@ -156,6 +205,7 @@ export default function Monitor() {
     useEffect(() => {
         fetchEatenMeals();
         fetchEatenMealSummary();
+        fetchFavourites();
     }, []);
 
 
@@ -325,6 +375,11 @@ export default function Monitor() {
     };
 
     const filteredMeals = meals.filter(meal => {
+
+        if (isFavourites) {
+            return favourites.some(meal2 => meal2.id === meal.id);
+        }
+
         const searchWords = searchTerm.toLowerCase().split(/\s+/);
         const mealNameLower = meal.name.toLowerCase();
         return searchWords.every(word => mealNameLower.includes(word));
@@ -339,6 +394,10 @@ export default function Monitor() {
         p: "20px",
         textAlign: "center"
     }
+    const isFavourite = (mealId) => {
+        return favourites.some(meal => meal.id === mealId);
+    };
+
 
     const FourthBox = {
         bgGradient: "linear(to-r, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.6))",
@@ -379,10 +438,17 @@ export default function Monitor() {
                                                onChange={(e) => setSearchTerm(e.target.value)}/>
                                         <Button ml={3} aria-label="Details" colorScheme="teal"
                                                 onClick={toggleFilter}><LuListFilter/> Filtruj</Button>
+                                        <Button ml={3} aria-label="Details" colorScheme="yellow"
+                                                onClick={() => setIsFavourites(!isFavourites)}
+                                        ><LuListFilter/>
+                                            <span>{!isFavourites ? "Pokaż ulubione" : "Pokaż wszystkie"}</span>
+                                        </Button>
 
                                     </Flex>
 
-                                    <Table mt={8} className="responsive-table" variant="simple" color="white">
+                                    <Text mt={5} fontSize="3xl" fontWeight="bold" color="white">{isFavourites ? "Ulubione posiłki" : "Wszystkie posiłki"}</Text>
+
+                                    <Table mt={3} className="responsive-table" variant="simple" color="white">
                                         <Thead>
                                             <Tr>
                                                 <Th color="rgba(255, 255, 255, 0.800)">Nazwa posiłku</Th>
@@ -392,6 +458,7 @@ export default function Monitor() {
                                                 <Th color="rgba(255, 255, 255, 0.800)">Węglowodany</Th>
                                                 <Th color="rgba(255, 255, 255, 0.800)">Tłuszcze</Th>
                                                 <Th color="rgba(255, 255, 255, 0.800)">Dodaj do spożytych</Th>
+                                                <Th color="rgba(255, 255, 255, 0.800)">Ulubione</Th>
                                             </Tr>
                                         </Thead>
                                         <Tbody>
@@ -424,6 +491,48 @@ export default function Monitor() {
                                                             </Flex>
                                                         )}
                                                     </Td>
+                                                    <Td data-label="Ulubione">
+                                                        {isFavourite(meal.id) ? (
+                                                        <Button
+                                                            colorScheme="yellow"
+                                                            size="lg"
+                                                            variant="ghost"
+                                                            p={4}
+                                                            _hover={{
+                                                                bg: "#499CFA",
+                                                                opacity: 0.8,
+                                                            }}
+                                                            transition="all 0.2s ease-in-out"
+                                                            onClick={() => deleteFavourite(meal.id, meal.name)}
+                                                        >
+                                                            <Icon
+                                                                as={StarIcon}
+                                                                boxSize={6}
+                                                                color={"yellow.500"}
+                                                            />
+                                                        </Button>
+                                                        ) : (
+                                                        <Button
+                                                            colorScheme="yellow"
+                                                            size="lg"
+                                                            variant="ghost"
+                                                            p={4}
+                                                            _hover={{
+                                                                bg: "#499CFA",
+                                                                opacity: 0.8,
+                                                            }}
+                                                            transition="all 0.2s ease-in-out"
+                                                            onClick={() => addFavourite(meal.id, meal.name)}
+                                                        >
+                                                            <Icon
+                                                                as={StarIcon}
+                                                                boxSize={6}
+                                                                color={"gray.300"}
+                                                            />
+                                                        </Button>
+                                                        )}
+                                                    </Td>
+
                                                 </Tr>
                                             ))}
                                         </Tbody>

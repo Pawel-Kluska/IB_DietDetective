@@ -1,5 +1,7 @@
 package com.example.dietdetectivespring.user;
 
+import com.example.dietdetectivespring.meal.FavouriteMealRequest;
+import com.example.dietdetectivespring.meal.Meal;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -75,6 +77,36 @@ public class UserController {
         } catch (EntityNotFoundException e) {
             throw new ResponseStatusException(
                     HttpStatus.NOT_FOUND, "Entity not found", e);
+        }
+    }
+
+    @GetMapping("/favourite")
+    public ResponseEntity<UserFavouriteMeals> getUserFavourites(@AuthenticationPrincipal UserDetails userPrincipal) {
+        try {
+            return ResponseEntity.ok(userService.getUserFavourites(userPrincipal.getUsername()));
+        } catch (EntityNotFoundException e) {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, "Entity not found", e);
+        }
+    }
+
+    @PostMapping("/favourite")
+    public ResponseEntity<User> saveFavourite(@RequestBody FavouriteMealRequest meal,
+                                              @AuthenticationPrincipal UserDetails userDetails) {
+        try {
+            return new ResponseEntity<>(userService.saveFavourite(meal, userDetails.getUsername()), HttpStatus.OK);
+        } catch (EntityNotFoundException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @DeleteMapping("/favourite/{id}")
+    public ResponseEntity<User> deleteFavourite(@PathVariable int id,
+                                              @AuthenticationPrincipal UserDetails userDetails) {
+        try {
+            return new ResponseEntity<>(userService.deleteFavourite(id, userDetails.getUsername()), HttpStatus.OK);
+        } catch (EntityNotFoundException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 

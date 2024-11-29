@@ -1,5 +1,6 @@
 package com.example.dietdetectivespring.user;
 
+import com.example.dietdetectivespring.meal.Meal;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -7,7 +8,9 @@ import lombok.*;
 import org.hibernate.Hibernate;
 
 import java.sql.Date;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 
 @Entity
@@ -54,11 +57,32 @@ public class User {
     @Column(name = "password", nullable = false)
     private String password;
 
+    @ManyToMany
+    @JoinTable(
+            name = "user_meals",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "meal_id")
+    )
+    @JsonIgnore
+    private Set<Meal> meals;
+
     public void setSurvey(UserSurveyRequest userSurveyRequest) {
         this.birthDate = userSurveyRequest.getBirthDate();
         this.targetWeight = userSurveyRequest.getTargetWeight();
         this.goal = userSurveyRequest.getGoal();
         this.sex = userSurveyRequest.getSex();
         this.height = userSurveyRequest.getHeight();
+    }
+
+    public void addFavouriteMeal(Meal meal) {
+        if (meals == null)
+            meals = new HashSet<>();
+        meals.add(meal);
+    }
+
+    public void deleteFavouriteMeal(Meal meal) {
+        if (meals == null)
+            meals = new HashSet<>();
+        meals.remove(meal);
     }
 }

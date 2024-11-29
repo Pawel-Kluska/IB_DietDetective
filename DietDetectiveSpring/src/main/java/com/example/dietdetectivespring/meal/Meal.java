@@ -2,13 +2,12 @@ package com.example.dietdetectivespring.meal;
 
 
 import com.example.dietdetectivespring.categories.Category;
+import com.example.dietdetectivespring.user.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.Hibernate;
 
-
-import java.util.Objects;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -58,6 +57,11 @@ public class Meal {
     @JsonIgnore
     @ToString.Exclude
     private Set<Category> categories;
+
+    @ManyToMany(mappedBy = "meals")
+    @JsonIgnore
+    @ToString.Exclude
+    private Set<User> users;
 
 
     public void multiplyProperties(Float multiplier) {
