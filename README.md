@@ -68,7 +68,7 @@ Rozpowszechniane na podstawie Licencji MIT. Zobacz [MIT LICENSE](https://github.
 - [x] możliwość dodawania posiłków do ulubionych / zakładka z ostatnio dodawanymi,
 - [ ] przeprojektowanie strony głównej, alternatywnie usunięcie jej,
 - [x] przeniesienie zmiany docelowej wagi z profilu do monitorowania,
-- [ ] usunięcie „Witaj Szymon” lub chociaż zmiana w interaktywny przycisk, by przenosiło do profilu,
+- [x] usunięcie „Witaj Szymon” lub chociaż zmiana w interaktywny przycisk, by przenosiło do profilu,
 - [x] usunięcie z zakładki „Monitorowanie”  okienka z „Miło Cię znów widzieć!”,
 - [x] poprawka przycisków przy listach, by przycisk „Następna” i numer strony się nie przesuwały po przejściu na 2 stronę.
 - [x] dodanie komunikatu o braku wyników wyszukiwania,

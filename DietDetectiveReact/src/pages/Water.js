@@ -356,10 +356,11 @@ export default function Water() {
 
                 <Legend />
                 <ReferenceLine y={2000} label="2000 ml" stroke="red" strokeDasharray="3 3" />
-                <Bar dataKey="nawodnienie" fill="#8884d8" />
+                <Bar dataKey="nawodnienie" fill="#8884d8" barSize={30} /> {/* Adjust barSize */}
               </BarChart>
             </ResponsiveContainer>
           </Box>
+
 
           <Box sx={CalendarBox}>
             <Text fontSize ={{ base: 'md', md: 'xl' }} fontWeight="bold" mb={4}>

@@ -28,8 +28,12 @@ export default function Login() {
                     <Stripe/>
                     <Spacer/>
                     <HStack spacing="20px">
-                        <FaUser size={20}/>
-                        <Text>Witaj, {auth.currentUser.firstName}!</Text>
+                        <Link to="/account">
+                            <Flex align="center">
+                                <FaUser size={20} />
+                                <Text ml={2}>Witaj, {auth.currentUser.firstName}!</Text>
+                            </Flex>
+                        </Link>
                         <Button colorScheme="blue" onClick={logout}>Wyloguj</Button>
                     </HStack>
                 </Flex>
