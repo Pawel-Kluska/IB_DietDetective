@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface MealRepository extends JpaRepository<Meal, Integer> {
 
-    @Query("SELECT DISTINCT m FROM Meal m JOIN m.categories c WHERE c.id IN :categoryIds")
+    @Query("SELECT DISTINCT m FROM Meal m JOIN m.categories c WHERE c.id IN :categoryIds ORDER BY m.name ASC")
     List<Meal> findAllByCategoryIdIn(List<Integer> categoryIds);
 }

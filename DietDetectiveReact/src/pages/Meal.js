@@ -479,7 +479,7 @@ export default function Monitor() {
                                                                 Dodaj spożyty posiłek
                                                             </Button>
                                                         ) : (
-                                                            <Flex justifyContent="center" alignItems="center">
+                                                            <Flex>
                                                                 <Button
                                                                     aria-label="Details"
                                                                     colorScheme="green"
