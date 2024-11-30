@@ -17,6 +17,8 @@ import NotFound from "./components/NotFound";
 import RecipesDetail from "./pages/RecipesDetail";
 import OpenAIForm from "./pages/Assistant";
 import Success from "./components/Success";
+import OldMain from "./old_pages/Main";
+import OldMeals from "./old_pages/Meal";
 
 
 const router = createBrowserRouter(
@@ -34,6 +36,8 @@ const router = createBrowserRouter(
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />
             <Route path="success" element={<PrivateRoute><Success/></PrivateRoute>} />
+            <Route path="old_meal" element={<PrivateRoute><OldMeals/></PrivateRoute>} />
+            <Route path="old_main" element={<PrivateRoute><OldMain/></PrivateRoute>} />
             <Route path="*" element={<NotFound />} />
             <Route path="/roboto.txt"  />
         </Route>
