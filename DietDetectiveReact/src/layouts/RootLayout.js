@@ -66,7 +66,8 @@ export default function RootLayout() {
               zIndex="999"
               aria-label="Burger menu"/>
           )}
-          {!isMobile && auth.isInterviewCompleted ? (<Login />) : ""}
+
+          {!isMobile ? (<Login />) : ""}
           {isMobile && auth.isInterviewCompleted ?  (
               <Flex as="nav" alignItems="center" color={"white"} ml = {5}>
                 <Stripe />
