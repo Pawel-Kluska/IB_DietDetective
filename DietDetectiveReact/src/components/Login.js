@@ -81,7 +81,7 @@ export default function Login() {
                 >
                     Pomoc
                 </Button>
-                {auth.isAuthenticated ? (
+                {auth.isAuthenticated &&
                     <>
                         <Link to="/account">
                             <Flex align="center">
@@ -93,11 +93,7 @@ export default function Login() {
                             Wyloguj
                         </Button>
                     </>
-                ) : (
-                    <Link to="/login">
-                        <Button colorScheme="blue">Zaloguj</Button>
-                    </Link>
-                )}
+                }
             </HStack>
 
             {/* Help Modal */}

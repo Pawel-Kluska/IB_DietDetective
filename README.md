@@ -73,7 +73,7 @@ Rozpowszechniane na podstawie Licencji MIT. Zobacz [MIT LICENSE](https://github.
 - [x] poprawka przycisków przy listach, by przycisk „Następna” i numer strony się nie przesuwały po przejściu na 2 stronę.
 - [x] dodanie komunikatu o braku wyników wyszukiwania,
 - [x] dodanie alfabetycznego sortowania,
-- [ ] oznaczenie wymaganych pól przy rejestracji i wymagań, które hasło musi spełnić,
+- [x] oznaczenie wymaganych pól przy rejestracji i wymagań, które hasło musi spełnić,
 - [ ] zmiana wyboru daty i formatu w wywiadzie środowiskowym na polski,
 - [x] nałożenie przycisku na ikony logowania i rejestracji,
 - [x] możliwość dodania posiłku z poziomu przepisu,

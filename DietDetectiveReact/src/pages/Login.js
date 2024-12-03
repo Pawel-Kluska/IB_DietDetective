@@ -21,7 +21,7 @@ import { useNavigate } from 'react-router-dom';
 import AuthContext from '../context/AuthProvider';
 
 const formContainerStyles = {
-    maxW: 'md',
+    maxW: 'lg',
     mx: 'auto',
     mt: 6,
     p: 10,
@@ -60,8 +60,6 @@ export default function Login() {
         email: Yup.string().required('Email jest wymagany').email('Nieprawidłowy format email'),
         password: Yup.string()
             .required('Hasło jest wymagane')
-            .min(8, 'Hasło musi mieć co najmniej 8 znaków')
-            .matches(/(?=.*[!@#$%^&*])/, 'Hasło musi zawierać co najmniej jeden znak specjalny (!@#$%^&*)'),
     });
     const fetchUserData = () => {
         getCurrentUser()

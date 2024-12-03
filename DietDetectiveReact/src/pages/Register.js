@@ -12,6 +12,8 @@ import {
     AlertIcon,
     AlertDescription,
     Checkbox,
+    UnorderedList,
+    ListItem
 } from '@chakra-ui/react';
 import {NavLink, useNavigate} from 'react-router-dom';
 import { useFormik } from 'formik';
@@ -20,7 +22,7 @@ import AuthContext from "../context/AuthProvider";
 import { register } from '../util/APIUtils';
 
 const formContainerStyles = {
-    maxW: "md",
+    maxW: "lg",
     mx: "auto",
     mt: 6,
     p: 10,
@@ -114,10 +116,13 @@ export default function Register() {
             <Text sx={textStyles}>
                 Uzupełnij, aby bezpłatnie zalogować się lub utworzyć nowe konto w systemie.
             </Text>
+            <Text fontSize="12px" color="white" mb={3}>
+                * - pole wymagane
+            </Text>
 
             <form onSubmit={formik.handleSubmit}>
                 <FormControl id="fullName" mb={4}>
-                    <FormLabel sx={formLabelStyles}>Imię</FormLabel>
+                    <FormLabel sx={formLabelStyles}>Imię*</FormLabel>
                     <Input
                         color="white"
                         type="text"
@@ -136,7 +141,7 @@ export default function Register() {
                 </FormControl>
 
                 <FormControl id="surname" mb={4}>
-                    <FormLabel sx={formLabelStyles}>Nazwisko</FormLabel>
+                    <FormLabel sx={formLabelStyles}>Nazwisko*</FormLabel>
                     <Input
                         color="white"
                         type="text"
@@ -155,7 +160,7 @@ export default function Register() {
                 </FormControl>
 
                 <FormControl id="email" mb={4}>
-                    <FormLabel sx={formLabelStyles}>Email</FormLabel>
+                    <FormLabel sx={formLabelStyles}>Email*</FormLabel>
                     <Input
                         color="white"
                         type="email"
@@ -173,8 +178,8 @@ export default function Register() {
                     )}
                 </FormControl>
 
-                <FormControl id="password" mb={4}>
-                    <FormLabel sx={formLabelStyles}>Hasło</FormLabel>
+                <FormControl id="password" mb={2}>
+                    <FormLabel sx={formLabelStyles}>Hasło*</FormLabel>
                     <Input
                         color="white"
                         type="password"
@@ -191,6 +196,14 @@ export default function Register() {
                         </Alert>
                     )}
                 </FormControl>
+                <Box fontSize="12px" color="white" mb={3}>
+                    Wymagania:
+                    <UnorderedList>
+                        <ListItem>minimum 8 znaków</ListItem>
+                        <ListItem>minimum 1 znak specjalny (!@#$%^&*)</ListItem>
+                    </UnorderedList>
+                </Box>
+
 
                 <FormControl mb={4} display="flex" alignItems="flex-start">
                     <Checkbox
