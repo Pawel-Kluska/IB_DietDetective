@@ -43,7 +43,7 @@ export default function Login() {
             isInterviewCompleted: false
         });
         localStorage.removeItem(ACCESS_TOKEN);
-        navigate('/login');
+        navigate('/');
     }
 
     const getHelpText = () => {

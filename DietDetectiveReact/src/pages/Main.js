@@ -1,18 +1,20 @@
 import '../css/App.css';
-import { Box, Heading, List, ListItem, Flex, Text, Image } from '@chakra-ui/react';
+import { Box, Heading, List, ListItem, Flex, Text, Image} from '@chakra-ui/react';
 import React from 'react';
+import Login from './Login';
 
 export default function Main() {
   return (
-      <div className="App">
-        <Box display="flex" justifyContent="center" align="center" height="80vh" ml ={{ base: '16', md: '0' }}>
-          <Flex alignItems="center" width="40%" justifyContent="center">
-            <List>
-              <ListItem color={"green.400"}>
-                <Heading as="h1" size="lg" >
-                  Głodni?
-                </Heading>
-              </ListItem>
+    <div className="App" >
+      <Flex ml="5%" mt="6">
+        <Box display="inline-block" position="relative" height="80vh" width="30vw" ml ={{ base: '6', md: '0' }} mt="6">
+          <Flex alignItems="center" justifyContent="center">
+            <Image width="40vh" height="40vh"
+                  src="img/logo_bg.png"
+                  alt="Logo"
+                  justifyContent="center"
+                  alignItems="center"/>
+            <List position="absolute" textAlign="-webkit-center">
               <ListItem color={"white"}>
                 <Heading as="h1" size="lg">
                   Z nami zjecie zdrowiej!
@@ -26,17 +28,14 @@ export default function Main() {
                 </Text>
               </ListItem>
             </List>
-            <Image
-                boxSize={{base: '50vh', md: '75vh', xl: '80vh'}}
-                src="img/circle.png"
-                alt="Circle"
-                position={"absolute"}
-                justifyContent="center"
-                alignItems="center"
-            />
           </Flex>
         </Box>
 
-      </div>
-  );
+        <Box display="inline-block" mr="15%" ml="auto">
+            <Login></Login>
+        </Box>
+      </Flex>
+
+    </div>
+);
 }

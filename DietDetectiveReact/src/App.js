@@ -37,7 +37,7 @@ const router = createBrowserRouter(
             <Route path="register" element={<Register />} />
             <Route path="success" element={<PrivateRoute><Success/></PrivateRoute>} />
             <Route path="old_meal" element={<PrivateRoute><OldMeals/></PrivateRoute>} />
-            <Route path="old_main" element={<PrivateRoute><OldMain/></PrivateRoute>} />
+            <Route path="old_main" element={<OldMain/>} />
             <Route path="*" element={<NotFound />} />
             <Route path="/roboto.txt"  />
         </Route>

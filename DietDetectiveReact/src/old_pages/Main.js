@@ -1,5 +1,5 @@
 import '../css/App.css';
-import { Box, Heading, List, ListItem, Flex, Text, Image } from '@chakra-ui/react';
+import { Box, Heading, List, ListItem, Flex, Text, Image} from '@chakra-ui/react';
 import React from 'react';
 
 export default function OldMain() {
@@ -7,6 +7,12 @@ export default function OldMain() {
       <div className="App">
         <Box display="flex" justifyContent="center" align="center" height="80vh" ml ={{ base: '16', md: '0' }}>
           <Flex alignItems="center" width="40%" justifyContent="center">
+            <Image boxSize={{base: '65vh', md: '70vh', xl: '72vh'}}
+                  src="img/logo_bg.png"
+                  alt="Logo"
+                  position={"absolute"}
+                  justifyContent="center"
+                  alignItems="center"/>
             <List>
               <ListItem color={"green.400"}>
                 <Heading as="h1" size="lg" >
@@ -26,14 +32,6 @@ export default function OldMain() {
                 </Text>
               </ListItem>
             </List>
-            <Image
-                boxSize={{base: '50vh', md: '75vh', xl: '80vh'}}
-                src="img/circle.png"
-                alt="Circle"
-                position={"absolute"}
-                justifyContent="center"
-                alignItems="center"
-            />
           </Flex>
         </Box>
 
