@@ -7,7 +7,7 @@ export default function OldMain() {
       <div className="App">
         <Box display="flex" justifyContent="center" align="center" height="80vh" ml ={{ base: '16', md: '0' }}>
           <Flex alignItems="center" width="40%" justifyContent="center">
-            <Image boxSize={{base: '65vh', md: '70vh', xl: '72vh'}}
+            <Image boxSize={{base: '65vh'}}
                   src="img/logo_bg.png"
                   alt="Logo"
                   position={"absolute"}

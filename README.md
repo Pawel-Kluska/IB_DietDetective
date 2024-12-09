@@ -66,7 +66,7 @@ Rozpowszechniane na podstawie Licencji MIT. Zobacz [MIT LICENSE](https://github.
 - [x] wydzielenie listy dodanych posiłków (tym samym usuwania) w inne miejsce,
 - [x] możliwość edycji wagi już dodanych posiłków,
 - [x] możliwość dodawania posiłków do ulubionych / zakładka z ostatnio dodawanymi,
-- [ ] przeprojektowanie strony głównej, alternatywnie usunięcie jej,
+- [x] przeprojektowanie strony głównej, alternatywnie usunięcie jej,
 - [x] przeniesienie zmiany docelowej wagi z profilu do monitorowania,
 - [x] usunięcie „Witaj Szymon” lub chociaż zmiana w interaktywny przycisk, by przenosiło do profilu,
 - [x] usunięcie z zakładki „Monitorowanie”  okienka z „Miło Cię znów widzieć!”,

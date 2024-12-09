@@ -109,7 +109,7 @@ export default function SideNavbar() {
                                 </Flex>
                             </NavLink>
                         </ListItem>
-                        <ListItem marginBottom="20px">
+                        {/* <ListItem marginBottom="20px">
                             <NavLink to="/chat"
                                      style={({ isActive }) => ({
                                          color: isActive ? "#3182ce" : "white", // Highlight active link
@@ -122,7 +122,7 @@ export default function SideNavbar() {
                                     Asystent
                                 </Flex>
                             </NavLink>
-                        </ListItem>
+                        </ListItem> */}
                         <ListItem marginBottom="20px">
                             <NavLink to="/account"
                                      style={({ isActive }) => ({
