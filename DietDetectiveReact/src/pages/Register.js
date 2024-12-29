@@ -197,7 +197,7 @@ export default function Register() {
                     )}
                 </FormControl>
                 <Box fontSize="12px" color="white" mb={3}>
-                    Wymagania:
+                    Hasło musi zawierać:
                     <UnorderedList>
                         <ListItem>minimum 8 znaków</ListItem>
                         <ListItem>minimum 1 znak specjalny (!@#$%^&*)</ListItem>
