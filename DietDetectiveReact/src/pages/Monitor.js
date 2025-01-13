@@ -36,7 +36,7 @@ export function calculatePercentWeight(weight, estimatedWeight) {
 }
 
 export function calculateWeightCircular(weight, estimatedWeight) {
-    let difWeight = weight - estimatedWeight;
+    let difWeight = estimatedWeight - weight;
     return Math.floor(difWeight);
 }
 
@@ -97,9 +97,7 @@ export function handleSetWeight(requestBody) {
 
 export function calculatePercentWater(weight, estimatedWeight) {
     let percentWeight = (weight / estimatedWeight) * 100;
-    if (percentWeight > 100) {
-        percentWeight = 100;
-    } else if (percentWeight < 0) {
+    if (percentWeight < 0) {
         percentWeight = 0;
     }
     return Math.floor(percentWeight);
@@ -418,6 +416,7 @@ export default function Monitor() {
                                     isIndeterminate={isIndeterminate}
                                     value={!isIndeterminate ? waterValue : undefined}
                                     size={{base: '100px', md: '150px'}}
+                                    color={waterValue > 150 ? 'red.500' : waterValue > 110 ? 'orange.300' : 'blue.500'}
                                     thickness='7'
                                 >
                                     <CircularProgressLabel>
