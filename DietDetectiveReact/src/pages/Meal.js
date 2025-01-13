@@ -422,10 +422,10 @@ export default function Monitor() {
                     <Box>
                         <Tabs variant='enclosed'>
                             <TabList w="full" mt={8}>
-                                <Tab flex="1">
+                                <Tab flex="1" _selected={{ bg: "blue.500" }}>
                                     <Text fontSize="xl" fontWeight="bold" color="white">Wyszukaj posiłki</Text>
                                 </Tab>
-                                <Tab flex="1">
+                                <Tab flex="1" _selected={{ bg: "blue.500" }}>
                                     <Text fontSize="xl" fontWeight="bold" color="white">Edytuj dzisiejsze posiłki</Text>
                                 </Tab>
                             </TabList>

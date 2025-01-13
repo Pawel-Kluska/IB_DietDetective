@@ -353,13 +353,23 @@ export default function Water() {
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="name" />
                 <YAxis />
-
                 <Legend />
-                <ReferenceLine y={2000} label="2000 ml" stroke="red" strokeDasharray="3 3" />
-                <Bar dataKey="nawodnienie" fill="#8884d8" barSize={30} /> {/* Adjust barSize */}
+                <ReferenceLine
+                    y={2000}
+                    label={{
+                      value: "2000",
+                      position: "left", // Moves the label to the left
+                      fill: "red", // Optional: customize the color
+                      fontSize: 12, // Optional: adjust font size
+                    }}
+                    stroke="red"
+                    strokeDasharray="3 3"
+                />
+                <Bar dataKey="nawodnienie" fill="#8884d8" barSize={30} />
               </BarChart>
             </ResponsiveContainer>
           </Box>
+
 
 
           <Box sx={CalendarBox}>

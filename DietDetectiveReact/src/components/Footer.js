@@ -22,7 +22,7 @@ const Footer = () => {
           </Flex>
           <Flex justifyContent="center">
             <Text fontSize="sm" opacity={0.8}>
-              &copy; {new Date().getFullYear()} Sebastian Bednarski
+              &copy; {new Date().getFullYear()} Paweł Kluska
             </Text>
           </Flex>
         </Flex>
