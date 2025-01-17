@@ -30,12 +30,14 @@ export default function SideNavbar() {
     return (
         <div className="App">
             <List color="white">
-                <Flex align="center">
-                    <Image src="img/logo.png" alt="logo" style={{width: "45px", height: "45px"}}/>
-                    <Heading size="md" as="h1">
-                        DietDetective
-                    </Heading>
-                </Flex>
+                <NavLink to="/monitor">
+                    <Flex align="center">
+                        <Image src="img/logo.png" alt="logo" style={{width: "45px", height: "45px"}}/>
+                        <Heading size="md" as="h1">
+                            DietDetective
+                        </Heading>
+                    </Flex>
+                </NavLink>
                 <hr style={lineStyle}/>
                 {auth.isInterviewCompleted && auth.isAuthenticated ? (
                     <>

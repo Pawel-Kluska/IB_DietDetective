@@ -189,7 +189,12 @@ export default function Interview() {
 
             <FormControl id="height" mb={4}>
                 <FormLabel sx={formLabelStyles}>Wzrost</FormLabel>
-                <Input color="white" type="number" placeholder="Podaj swój wzrost [cm]" _placeholder={{ color: 'white' }} value={height} onChange={(e) => setHeight(e.target.value)} />
+                <Input color="white" type="number"
+                       placeholder="Podaj swój wzrost [cm]"
+                       _placeholder={{ color: 'white' }}
+                       value={height} onChange={(e) => setHeight(e.target.value)}
+                       onWheel={(e) => e.target.blur()} // Prevent scroll behavior
+                />
                 {validationErrors.height && (
                     <Alert status="error">
                         <AlertIcon />
@@ -228,7 +233,16 @@ export default function Interview() {
 
             <FormControl id="weight" mb={4}>
                 <FormLabel sx={formLabelStyles}>Waga</FormLabel>
-                <Input color="white" type="number" placeholder="Podaj swoją wagę [kg]" _placeholder={{ color: 'white' }} value={weight} onChange={(e) => setWeight(e.target.value)} />
+                <Input
+                    color="white"
+                    type="number"
+                    placeholder="Podaj swoją wagę [kg]"
+                    _placeholder={{ color: 'white' }}
+                    value={weight}
+                    onChange={(e) => setWeight(e.target.value)}
+                    onWheel={(e) => e.target.blur()} // Prevent scroll behavior
+                    onKeyDown={(e) => e.key === 'ArrowUp' || e.key === 'ArrowDown' ? e.preventDefault() : null} // Disable arrow keys
+                />
                 {validationErrors.weight && (
                     <Alert status="error">
                         <AlertIcon />
@@ -246,6 +260,8 @@ export default function Interview() {
                     _placeholder={{ color: 'white' }}
                     value={targetWeight}
                     onChange={(e) => setTargetWeight(e.target.value)}
+                    onWheel={(e) => e.target.blur()} // Prevent scroll behavior
+                    onKeyDown={(e) => e.key === 'ArrowUp' || e.key === 'ArrowDown' ? e.preventDefault() : null} // Disable arrow keys
                 />
                 {validationErrors.targetWeight && (
                     <Alert status="error">
@@ -254,6 +270,7 @@ export default function Interview() {
                     </Alert>
                 )}
             </FormControl>
+
 
             <Button colorScheme="messenger" size="md" w="full" onClick={handleFinishInterviewClick}>
                 Zakończ wywiad
